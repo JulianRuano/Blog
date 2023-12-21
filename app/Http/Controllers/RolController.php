@@ -67,9 +67,20 @@ class RolController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rol $rol)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required|max:50|unique:roles,name,'.$id,
+            'description' => 'required',
+        ]);
+
+        $rol = Rol::find($id);
+        $rol->name = $request->name;
+        $rol->description = $request->description;
+        $rol->save();
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Rol actualizado correctamente.');
     }
 
     /**
@@ -77,6 +88,6 @@ class RolController extends Controller
      */
     public function destroy(Rol $rol)
     {
-        //
+        
     }
 }
