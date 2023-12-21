@@ -86,8 +86,12 @@ class RolController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Rol $rol)
+    public function destroy($id)
     {
-        
+        $rol = Rol::find($id);
+        $rol->delete();
+
+        return redirect()->route('roles.index')
+            ->with('success', 'Rol eliminado correctamente.'); 
     }
 }
