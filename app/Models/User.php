@@ -13,4 +13,11 @@ class User extends Model
     {
         return $this->belongsTo(Rol::class, 'rol_id', 'id');
     }
+
+    protected $fillable = [
+        'name',
+        'email',
+        'rol_id',
+        'password',
+    ];
 }

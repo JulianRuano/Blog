@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\RolController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,7 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource(
-    '/roles',
-    RolController::class
-)->names('roles');
+Route::resource('/roles',RolController::class)->names('roles');
+
+Route::resource('/users',UserController::class)->names('users');
