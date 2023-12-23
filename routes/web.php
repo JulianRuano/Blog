@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +23,5 @@ Route::get('/', function () {
 Route::resource('/roles',RolController::class)->names('roles');
 
 Route::resource('/users',UserController::class)->names('users');
+
+Route::resource('/categories',CategoryController::class)->names('categories');
