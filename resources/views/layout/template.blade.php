@@ -24,10 +24,13 @@
                 </ul>
             </nav>
         </div>
-        <div class="flex-1 p-10 text-2xl font-bold">
+        <div class="flex-1">
             @yield('content')
         </div>
     </div>
-    
+    <footer class="bg-gray-800 text-white text-center py-4">
+        Copyrigth &copy; 2023
+    </footer>
 </body>
+
 </html>

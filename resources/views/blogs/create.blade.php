@@ -50,7 +50,7 @@
                 <textarea name="content" id="content" cols="30" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20">{{ old('description') }}</textarea>
             </div>
 
-           {{--Pedir imagen y previzualizar y guardar la url --}}
+
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="image">Imagen:</label>
                 <input type="file" name="image" id="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20">
