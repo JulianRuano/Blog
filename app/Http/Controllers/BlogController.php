@@ -44,7 +44,8 @@ class BlogController extends Controller
             'category_id' => 'required',
             'description' => 'required|max:200',
             'slug' => 'required',
-            //'content' => 'required',
+            'alt' => 'required',
+            'content' => 'required',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
  
@@ -68,18 +69,18 @@ class BlogController extends Controller
         $image = new Image();
         $image -> blog_id = $blog -> id;
         $image -> url = $image_name;
-        $image -> alt = 'alt';
+        $image -> alt = $request -> alt;
         $image -> position = 1;
 
         $image -> save();
 
-        // $content = new Content();
-        // $content -> blog_id = $blog -> id;
-        // $content -> title = 'titulo';
-        // $content -> position = 1;
-        // $content -> text = $request -> content;
+        $content = new Content();
+        $content -> blog_id = $blog -> id;
+        $content -> title = $request -> title;
+        $content -> position = 1;
+        $content -> text = $request -> content;
 
-        // $content -> save();
+        $content -> save();
 
         return redirect() -> route('blogs.index')
             -> with('success', 'Blog creado correctamente.');

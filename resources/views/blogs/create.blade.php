@@ -44,7 +44,6 @@
                 id="slug" type="text" name="slug" value="{{ old('slug') }}">
             </div>
 
-
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="content">Contenido:</label>
                 <textarea name="content" id="content" cols="30" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-20">{{ old('description') }}</textarea>
@@ -57,6 +56,11 @@
                 <img id="preview" class="mt-2" src="" alt="Imagen" width="300px">
             </div>
 
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="alt">Alt:</label>
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                id="alt" type="text" name="alt" value="{{ old('alt') }}">
+            </div>
 
             <div class="flex items-center justify-between">
                 <a href="/users" class="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
