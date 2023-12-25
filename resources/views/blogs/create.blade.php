@@ -19,7 +19,7 @@
                 </ul>
             </div>
         @endif
-        <form action="/blogs" method="POST">
+        <form action="/blogs" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Titulo:</label>

@@ -44,9 +44,10 @@ class BlogController extends Controller
             'category_id' => 'required',
             'description' => 'required|max:200',
             'slug' => 'required',
-            'content' => 'required',
-            'image' => 'required',
+            //'content' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
+ 
 
         $blog = new Blog();
         $blog -> user_id = 1;
@@ -56,30 +57,29 @@ class BlogController extends Controller
         $blog -> slug = $request -> slug;
 
         $blog -> save();
-        //obetner el id del blog creado
-        $blog = Blog::latest('id')->first();
 
         // guardar imagen en storage/app/public/images
-        $request->file('image')->store('public/images');
-        //obtener el nombre de la imagen
-        $image_name = $request->file('image')->hashName();
+        $img = $request->file('image');
+        $image_name = time().'.'.$img->extension();
 
+        $img->storeAs('public/images', $image_name);
+
+        // guardar imagen en la base de datos
         $image = new Image();
         $image -> blog_id = $blog -> id;
         $image -> url = $image_name;
-        $image -> alt = 'blog';
+        $image -> alt = 'alt';
         $image -> position = 1;
-
 
         $image -> save();
 
-        $content = new Content();
-        $content -> blog_id = $blog -> id;
-        $content -> title = 'titulo';
-        $content -> position = 1;
-        $content -> text = $request -> content;
+        // $content = new Content();
+        // $content -> blog_id = $blog -> id;
+        // $content -> title = 'titulo';
+        // $content -> position = 1;
+        // $content -> text = $request -> content;
 
-        $content -> save();
+        // $content -> save();
 
         return redirect() -> route('blogs.index')
             -> with('success', 'Blog creado correctamente.');

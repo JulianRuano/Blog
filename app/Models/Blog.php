@@ -22,4 +22,14 @@ class Blog extends Model
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'blog_id', 'id');
+    }
+
+    public function contents()
+    {
+        return $this->hasMany(Content::class, 'blog_id', 'id');
+    }
+
 }
