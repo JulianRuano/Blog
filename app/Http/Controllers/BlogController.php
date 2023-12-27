@@ -57,7 +57,6 @@ class BlogController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-
         $blog = new Blog();
         $blog -> user_id = 1;
         $blog -> title = $request -> title;
@@ -70,10 +69,9 @@ class BlogController extends Controller
         // guardar imagen en storage/app/public/images
         $img = $request->file('image');
         $image_name = time().'.'.$img->extension();
-
         $img->storeAs('public/images', $image_name);
 
-        // guardar imagen redimensionada en storage/app/public/images
+        // guardar imagen redimensionada
         $this->imageService-> resizeImage($image_name, 300, 300);
 
         // guardar imagen en la base de datos
@@ -185,8 +183,14 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
+        //Buscar la imagen por blog_id
+        $images = Image::where('blog_id', $id)->get();
+        $image_name = $images[0]->url;
+        
         $blog = Blog::find($id);
         $blog -> delete();
+         
+        $this->imageService-> deleteImage($image_name);
 
         return redirect() -> route('blogs.index')
             -> with('success', 'Blog eliminado correctamente.');

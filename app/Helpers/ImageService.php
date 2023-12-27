@@ -20,14 +20,10 @@ class ImageService implements ImageServiceInterface
        
     }
 
-    public function deleteImage($image)
+    public function deleteImage($fileName)
     {
-        try {
-            unlink($image);
-            return true;
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
+        Storage::disk('local')->delete('public/images/' . $fileName);
+        Storage::disk('local')->delete('public/images/miniature/' . $fileName);      
     }
 
 }
