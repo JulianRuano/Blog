@@ -6,10 +6,18 @@ use App\Models\Blog;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\Image;
+use App\Interfaces\ImageServiceInterface;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
+
+    private $imageService;
+    
+    public function __construct(ImageServiceInterface $imageService)
+    {
+        $this->imageService = $imageService;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -64,6 +72,9 @@ class BlogController extends Controller
         $image_name = time().'.'.$img->extension();
 
         $img->storeAs('public/images', $image_name);
+
+        // guardar imagen redimensionada en storage/app/public/images
+        $this->imageService-> resizeImage($image_name, 300, 300);
 
         // guardar imagen en la base de datos
         $image = new Image();
