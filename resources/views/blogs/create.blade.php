@@ -7,17 +7,20 @@
     <div class="bg-white p-6 rounded shadow-md w-2/4 my-16">
         <h2 class="text-2xl mb-4">Crear Blog</h2>
         @if ($errors->any())
-            <div class="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                Errores
-            </div>
-            <div class="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700 mb-4">
-                <p><strong>Por favor corrige los siguientes errores:</strong></p>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li class="list-disc ml-4">{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
+            <div class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 " role="alert">
+                <svg class="flex-shrink-0 inline w-4 h-4 me-3 mt-[2px]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span class="sr-only">Errores</span>
+                <div>
+                  <span class="font-medium">Errores</span>
+                    <ul class="mt-1.5 list-disc list-inside">
+                        @foreach ($errors->all() as $error)
+                            <li class="list-disc ml-4">{{ $error }}</li>
+                        @endforeach
+                  </ul>
+                </div>
+              </div>
         @endif
         <form action="/blogs" method="POST" enctype="multipart/form-data">
             @csrf
@@ -118,6 +121,7 @@
                 reader.readAsDataURL(file);
             }
         });
+
     </script>
 
 </main>
