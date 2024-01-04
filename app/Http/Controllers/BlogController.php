@@ -13,7 +13,7 @@ class BlogController extends Controller
 {
 
     private $imageService;
-    
+
     public function __construct(ImageServiceInterface $imageService)
     {
         $this->imageService = $imageService;
@@ -25,7 +25,7 @@ class BlogController extends Controller
     {
         return view('blogs.index', [
             'categories' => Category::all(),
-            'blogs' => Blog::all(),       
+            'blogs' => Blog::all(),
         ]);
     }
 
@@ -120,7 +120,7 @@ class BlogController extends Controller
             'categories' => Category::all(),
             'images' => $images,
             'contents' => $contents,
-        ]);      
+        ]);
     }
 
     /**
@@ -186,10 +186,10 @@ class BlogController extends Controller
         //Buscar la imagen por blog_id
         $images = Image::where('blog_id', $id)->get();
         $image_name = $images[0]->url;
-        
+
         $blog = Blog::find($id);
         $blog -> delete();
-         
+
         $this->imageService-> deleteImage($image_name);
 
         return redirect() -> route('blogs.index')

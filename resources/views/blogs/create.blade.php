@@ -26,24 +26,24 @@
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="name">Titulo:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="title" type="text" name="title" value="{{ old('title') }}">
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="description">Descripción:</label>
                 <textarea name="description" id="description" cols="10" rows="10" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-10">{{ old('description') }}</textarea>
-            </div>              
+            </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="category_id">Categoría:</label>
                 <select name="category_id" id="category_id" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                     @foreach ($categories as $category)
-                        <option value="{{ $category->id }}">{{ $category->name }}</option>    
+                        <option value="{{ $category->id }}">{{ $category->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="slug">Slug:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="slug" type="text" name="slug" value="{{ old('slug') }}">
             </div>
 
@@ -63,17 +63,17 @@
                             <p class="text-xs text-slate-700 upload" id="p2">PNG, JPG (MAX. 1920x1080px)</p>
                             <p id="file-name" class="text-xs text-slate-700 mt-2"></p>
                         </div>
-                    
-                    <input id="image" type="file" class="hidden" />
+
+                    <input id="image" name="image" type="file" class="hidden" />
                 </label>
-            </div> 
+            </div>
 
             <div class="preview-container  justify-center max-w-80 mx-auto mb-4
             " id="image-preview-container"></div>
-            
+
             <div class="mb-4">
                 <label class="block text-gray-700 text-sm font-bold mb-2" for="alt">Alt:</label>
-                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+                <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="alt" type="text" name="alt" value="{{ old('alt') }}">
             </div>
 
@@ -94,13 +94,13 @@
         const fileNameParagraph = document.getElementById('file-name');
         const deleteP1 = document.getElementById('p1');
         const deleteP2 = document.getElementById('p2');
-    
+
         dropzoneFileInput.addEventListener('change', (event) => {
             const file = event.target.files[0];
-    
+
             if (file) {
                 const reader = new FileReader();
-    
+
                 reader.onload = (readerEvent) => {
                     const previewImage = document.createElement('img');
                     previewImage.src = readerEvent.target.result;
@@ -109,15 +109,15 @@
                     previewImage.classList.add('rounded-lg');
                     previewImage.style.maxWidth = '320px';
                     previewImage.style.maxHeight = '240px';
-    
+
                     fileNameParagraph.textContent = file.name;
                     deleteP1.style.display = 'none';
                     deleteP2.style.display = 'none';
-                     
+
                     imagePreviewContainer.innerHTML = '';
                     imagePreviewContainer.appendChild(previewImage);
                 };
-    
+
                 reader.readAsDataURL(file);
             }
         });
